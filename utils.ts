@@ -1,7 +1,10 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { formatDistanceToNow, format } from 'date-fns'
-import { MOOD_COLORS } from '@/types'
+import { MOOD_COLORS, MOOD_TAGS } from '@/types'
+
+// Re-export for convenience
+export { MOOD_TAGS } from '@/types'
 
 /** Merge Tailwind classes safely */
 export function cn(...inputs: ClassValue[]) {
