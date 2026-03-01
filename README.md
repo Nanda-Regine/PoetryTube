@@ -1,57 +1,57 @@
 # 🌹 PoetryTube — Where African Voices Live Forever
 
-Africa's first dedicated spoken word, slam poetry, and performance art video platform. PoetryTube is not a rebrand — it's a real product built for a real market: the millions of African poets, griots, and storytellers whose voices deserve a permanent home.
-
-Built by **Nanda Regine** — Creative Technologist & AI Engineer @ [Mirembe Muse (Pty) Ltd](https://creativelynanda.co.za)
-
----
-
-## 🎯 Mission
-
-> *"Where African Voices Live Forever"*
-
-PoetryTube exists to preserve, celebrate, and amplify African spoken word, slam poetry, storytelling, theatre, and performance art — content that is underserved by mainstream video platforms.
+Africa's first dedicated spoken word, slam poetry, and performance art platform.  
+Built with **Next.js 15**, **Supabase**, **Tailwind CSS**, and **OpenAI**.
 
 ---
 
-## ✨ AI Features
+## 🚀 Quick Start
 
-All AI features use **OpenAI gpt-4o-mini** for fast, low-cost inference.
-
-### 1. Write With Me 🌹 (Watch Page)
-The signature feature. On any video watch page, a sidebar panel invites viewers to be inspired by the performance they just watched.
-
-- **How it works:** User enters the opening lines of a poem they feel inspired to write. On click, the app sends their text to the OpenAI API with a system prompt instructing it to respond as a poet in the African spoken word tradition — completing the poem in 4–6 powerful lines.
-- **Output:** Displayed in a styled box with a gold border, in italic serif type
-- **Actions:** Copy to clipboard + Share on WhatsApp (deep link with pre-filled text)
-- **Mobile:** Fullscreen bottom sheet triggered by a floating 🌹 button
-
-**System prompt:**
-```
-You are a poet who writes in the African spoken word tradition. Complete the following poem opening in 4-6 lines that honor the emotional tone and imagery the writer has begun. Write only the poem continuation — no explanation, no preamble. Make it powerful.
+### 1. Clone & Install
+```bash
+git clone https://github.com/YOUR_USERNAME/poetrytube.git
+cd poetrytube
+npm install
 ```
 
-### 2. Title Generator ✨ (Upload / Creator Page)
-When a creator is uploading their performance, they can paste their poem and get 5 title suggestions — each in a different style.
-
-- **How it works:** Creator pastes their poem or description. On click, the API returns 5 titles: provocative, poetic, intimate, philosophical, and punchy.
-- **Output:** Displayed as clickable chips — clicking any chip populates the title input field
-
-**System prompt:**
-```
-Generate 5 compelling titles for a spoken word performance based on the content provided. Each title must be different in style: 1. Provocative and political, 2. Poetic and abstract, 3. Deeply personal and intimate, 4. Universal and philosophical, 5. Short and punchy (under 4 words). Return ONLY a numbered list of titles. No explanations.
+### 2. Set Up Environment Variables
+```bash
+cp .env.example .env.local
+# Fill in your Supabase and OpenAI keys in .env.local
 ```
 
-### 3. Mood Auto-Tagger 🏷️ (Upload / Creator Page)
-Automatically reads a poem or description and selects the most accurate mood tags from PoetryTube's fixed vocabulary.
+### 3. Set Up Supabase Database
+1. Create a project at [supabase.com](https://supabase.com)
+2. Go to **SQL Editor** in your Supabase dashboard
+3. Copy & paste the contents of `supabase/schema.sql` and run it
+4. This creates all tables, RLS policies, triggers, and storage buckets
 
-- **How it works:** Creator clicks "Auto-Tag Mood". The API returns a JSON array of 1–3 moods from: `['Defiant', 'Tender', 'Grief', 'Joy', 'Resistance', 'Love', 'Identity', 'Hope']`
-- **Output:** Matching mood chips are auto-selected in the UI. Creators can also adjust manually.
+### 4. Configure Supabase Auth
+In your Supabase dashboard → **Authentication → URL Configuration**:
+- Site URL: `http://localhost:3000` (dev) or your production URL
+- Redirect URLs: Add `http://localhost:3000/auth/callback`
 
-**System prompt:**
+### 5. Run Development Server
+```bash
+npm run dev
+# Open http://localhost:3000
 ```
-You are a poetry curator. Read the following poem or description and return ONLY a JSON array of 1-3 mood tags from this exact list: ['Defiant', 'Tender', 'Grief', 'Joy', 'Resistance', 'Love', 'Identity', 'Hope']. Return ONLY the JSON array. Nothing else.
-```
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer         | Tech                                    |
+|---------------|-----------------------------------------|
+| Framework     | Next.js 15 (App Router)                 |
+| Styling       | Tailwind CSS 3                          |
+| Database      | Supabase (PostgreSQL)                   |
+| Auth          | Supabase Auth                           |
+| Storage       | Supabase Storage                        |
+| AI            | OpenAI gpt-4o-mini                      |
+| Analytics     | Vercel Analytics + Speed Insights       |
+| Fonts         | Playfair Display, Cormorant Garamond, DM Sans |
+| Deploy        | Vercel                                  |
 
 ---
 
@@ -59,96 +59,69 @@ You are a poetry curator. Read the following poem or description and return ONLY
 
 ```
 poetrytube/
-├── index.html       — Homepage: video grid, mood filter bar, sidebar
-├── watch.html       — Watch page: video player + Write With Me panel
-├── upload.html      — Creator page: upload form + AI title gen + mood tagger
-├── general.css      — CSS variables, resets, base styles, utilities
-├── header.css       — Top navigation header
-├── sidebar.css      — Sidebar + mobile drawer
-├── video.css        — Video cards, mood pills, grid, mood filter bar
-├── watch.css        — Watch page layout + Write With Me panel styles
-├── upload.css       — Creator page form styles + AI feature cards
-├── app.js           — All JavaScript: UI interactions + AI API calls
-└── README.md        — This file
+├── app/                    # Next.js App Router pages
+│   ├── layout.tsx          # Root layout (header, sidebar, analytics)
+│   ├── page.tsx            # Homepage with video/poem feed
+│   ├── watch/[id]/         # Video watch page + Write With Me AI
+│   ├── poem/[id]/          # Poem reading page with likes & reviews
+│   ├── upload/             # Upload video or post poem
+│   ├── profile/[username]/ # Poet profile page
+│   ├── auth/               # Login, signup, callback
+│   └── api/                # Server-side API routes (AI, view counts)
+├── components/             # Reusable React components
+│   ├── layout/             # Header, Sidebar, Footer
+│   ├── video/              # VideoCard, VideoGrid, VideoPlayer
+│   ├── poem/               # PoemCard, PoemViewer, CommentSection
+│   ├── profile/            # ProfileCard, SocialLinks, FollowButton
+│   ├── ai/                 # WriteWithMe, TitleGenerator, MoodAutoTagger
+│   └── ui/                 # MoodFilter, MoodPill, LoadingDots, etc.
+├── lib/
+│   ├── supabase/           # client.ts, server.ts (Supabase helpers)
+│   └── utils.ts            # Shared utility functions
+├── types/index.ts          # Global TypeScript types
+├── styles/globals.css      # Global styles + Tailwind base
+├── middleware.ts           # Auth route protection
+├── supabase/schema.sql     # Complete database schema (run once)
+└── .env.example            # Environment variable template
 ```
 
 ---
 
-## 🔧 Tech Stack
+## ✨ Features
 
-| Layer       | Tech                          |
-|-------------|-------------------------------|
-| Markup      | HTML5 (semantic)              |
-| Styling     | CSS3 (custom properties, Grid, Flexbox) |
-| Interactivity | Vanilla JavaScript (ES2020+) |
-| AI          | OpenAI API — gpt-4o-mini      |
-| Fonts       | Playfair Display, Cormorant Garamond, DM Sans (Google Fonts) |
-| Deploy      | Vercel                        |
-
----
-
-## 🚀 Setup
-
-```bash
-# 1. Clone the repo
-git clone https://github.com/Nanda-Regine/CreativelyNanda-Youtube-clone.git
-cd CreativelyNanda-Youtube-clone
-
-# 2. Add your OpenAI API key
-# In index.html, watch.html, and upload.html, find:
-#   <script>window.OPENAI_API_KEY = '';</script>
-# Replace the empty string with your key:
-#   <script>window.OPENAI_API_KEY = 'sk-...';</script>
-
-# 3. Open in browser
-open index.html
-```
-
-> **Note:** For production, never expose your API key in frontend HTML. Use a backend proxy or Vercel serverless function to keep your key secure.
+- **Video Platform** — Upload, stream, and discover African spoken word performances
+- **Poem Platform** — Post poems as text with rich formatting (AllPoetry-style but better)
+- **AI Write With Me** — AI completes your poem in the African spoken word tradition
+- **AI Title Generator** — 5 styled title suggestions for your performance
+- **AI Mood Auto-Tagger** — Automatically tags emotional mood from poem content
+- **User Profiles** — Showcase videos, poems, social links, follower counts
+- **Engagement** — Views, likes, and reviews on all content
+- **Mood Filtering** — Filter by: Defiant, Tender, Grief, Joy, Resistance, Love, Identity, Hope
+- **Mobile-First** — Fully responsive at 375px with bottom-sheet panels
+- **SEO Optimized** — Open Graph, Twitter cards, structured data, sitemap
+- **Vercel Analytics** — Page views and performance tracking built in
 
 ---
 
-## 📋 Features
+## 🔐 Security
 
-- ✅ African-identity brand — deep burgundy, gold, near-black palette
-- ✅ 9 navigation categories for African poetry/performance content
-- ✅ Mood filter bar — filter videos by: Defiant, Tender, Grief, Joy, Resistance, Love, Identity, Hope
-- ✅ 9 seed video cards with mood pills and CSS gradient thumbnails
-- ✅ AI Feature 1: Write With Me — poem completion in African spoken word tradition
-- ✅ AI Feature 2: Title Generator — 5 styled title ideas as clickable chips
-- ✅ AI Feature 3: Mood Auto-Tagger — JSON-parsed mood tags from fixed vocabulary
-- ✅ Mobile-responsive at 375px — hamburger nav, single-column grid, bottom-sheet panel
-- ✅ Minimum 44px tap targets throughout
-- ✅ CSS-only thumbnail gradients — no image dependencies
-- ✅ Like button, follow button, share and save actions
-- ✅ WhatsApp deep-link sharing of AI-generated poems
-
----
-
-## 📖 Case Study
-
-[Read about the build process →](https://creativelynanda.co.za/blog)
+- Row Level Security (RLS) on all Supabase tables
+- Server-side auth validation in middleware
+- API keys never exposed to client
+- OpenAI calls go through Next.js API routes only
+- Service role key only used server-side
 
 ---
 
 ## 🛣️ Roadmap
 
-- [ ] Backend video upload (Supabase Storage)
-- [ ] User authentication (Supabase Auth)
-- [ ] Real video playback
-- [ ] Search functionality
-- [ ] Comments and reactions
-- [ ] Creator profiles
-- [ ] Next.js migration for SSR + performance
+- [ ] Real-time notifications (Supabase Realtime)
+- [ ] Search with full-text indexing
+- [ ] Collections / playlists
+- [ ] Creator monetisation
+- [ ] Mobile app (React Native + Expo)
 
 ---
 
-## 👩🏾‍💻 Built By
-
-**Nanda Regine** — Creative Technologist & AI Engineer  
-Founder, Mirembe Muse (Pty) Ltd — East London, South Africa  
-[creativelynanda.co.za](https://creativelynanda.co.za) · [hello@mirembemuse.co.za](mailto:hello@mirembemuse.co.za)
-
----
-
-*PoetryTube is a Mirembe Muse product concept.*
+Built by **Nanda Regine** · Creative Technologist & AI Engineer  
+[Mirembe Muse (Pty) Ltd](https://creativelynanda.co.za) · East London, South Africa

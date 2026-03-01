@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:wght@700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ─────────────────── */
+:root {
+  --header-height: 60px;
+  --sidebar-width: 240px;
+  --sidebar-collapsed: 72px;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-dm-sans: 'DM Sans', sans-serif;
+}
+
+/* ── Base Reset & Typography ───────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #0F0A0A;
+  color: #F5F0E8;
+  font-family: var(--font-dm-sans), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Custom Scrollbar ──────────────────────── */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: #0F0A0A; }
+::-webkit-scrollbar-thumb  { background: #6B1840; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #8B2252; }
+
+/* ── Selection ─────────────────────────────── */
+::selection {
+  background: rgba(212, 175, 55, 0.25);
+  color: #F5F0E8;
+}
+
+/* ── Focus rings ───────────────────────────── */
+:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Loading dot animation ──────────────────── */
+.loading-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #D4AF37;
+  border-radius: 50%;
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+.loading-dot:nth-child(2) { animation-delay: 0.2s; }
+.loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ── Animations ─────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+  40%           { transform: scale(1);   opacity: 1;   }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes shimmerBg {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #1A1015 25%,
+    #221520 50%,
+    #1A1015 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmerBg 1.5s infinite;
+  border-radius: 6px;
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #F5F0E8 0%, #D4AF37 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Poem content display */
+.poem-content {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  color: #F5F0E8;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 1.1rem;
+}
+
+/* AI output poem */
+.ai-poem-output {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #F5F0E8;
+  white-space: pre-wrap;
+  border-left: 2px solid #A8892A;
+  padding-left: 14px;
+}
+
+/* Mood pill base */
+.mood-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.mood-pill:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Mobile sidebar offset */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 0px;
+  }
+}
