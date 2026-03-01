@@ -1,0 +1,24 @@
+# Environment — NEVER commit these
+.env
+.env.local
+.env.production
+.env*.local
+
+# Vercel
+.vercel
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (for when you add a build step or Supabase SDK)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build output
+dist/
+.next/
+out/

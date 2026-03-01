@@ -1,0 +1,218 @@
+/* ============================================================
+   POETRYTUBE — auth.css
+   Sign in / Sign up modal
+   ============================================================ */
+
+.auth-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-modal.open {
+  display: flex;
+}
+
+/* Backdrop */
+.auth-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+/* Card */
+.auth-card {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  width: min(420px, calc(100vw - 32px));
+  padding: 32px 28px 28px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.08);
+  animation: authCardIn 0.25s ease;
+}
+
+@keyframes authCardIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Close button */
+.auth-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition), background var(--transition);
+}
+.auth-close:hover { color: var(--text); background: var(--bg-hover); }
+
+/* Header */
+.auth-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.auth-logo-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 8px;
+}
+.auth-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+.auth-subtitle {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Tabs */
+.auth-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.auth-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 10px 0;
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition);
+}
+.auth-tab:hover { color: var(--text); }
+.auth-tab.active {
+  color: var(--gold);
+}
+.auth-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px 2px 0 0;
+}
+
+/* Form panels */
+.auth-form-panel {
+  display: none;
+}
+.auth-form-panel.active {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+/* Inputs */
+.auth-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 11px 14px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+.auth-input::placeholder { color: var(--text-dim); }
+.auth-input:focus {
+  border-color: var(--burgundy-light);
+  box-shadow: 0 0 0 3px rgba(139, 34, 82, 0.18);
+}
+
+/* Submit button */
+.auth-submit-btn {
+  width: 100%;
+  background: var(--burgundy);
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background var(--transition), transform var(--transition);
+  min-height: 44px;
+}
+.auth-submit-btn:hover:not(:disabled) {
+  background: var(--burgundy-light);
+  transform: translateY(-1px);
+}
+.auth-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Error text */
+.auth-error {
+  font-size: 0.8rem;
+  color: #E85D26;
+  margin-top: 8px;
+  min-height: 1.2em;
+  text-align: center;
+}
+
+/* Sign out link in profile menu */
+.signout-link {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 0;
+  text-decoration: underline;
+  transition: color var(--transition);
+}
+.signout-link:hover { color: var(--text); }
+
+/* Loading dots (reused from general.css pattern) */
+.auth-submit-btn .loading-dots {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+.auth-submit-btn .loading-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: dotPulse 1.2s infinite ease-in-out;
+}
+.auth-submit-btn .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.auth-submit-btn .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .auth-card { padding: 24px 18px 20px; }
+  .auth-title { font-size: 1.2rem; }
+}

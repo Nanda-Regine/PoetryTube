@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Your Work — PoetryTube</title>
+  <meta name="description" content="Share your spoken word, slam poetry, or performance art on PoetryTube." />
+
+  <link rel="stylesheet" href="styles/general.css" />
+  <link rel="stylesheet" href="styles/header.css" />
+  <link rel="stylesheet" href="styles/sidebar.css" />
+  <link rel="stylesheet" href="styles/upload.css" />
+  <link rel="stylesheet" href="styles/auth.css" />
+</head>
+<body>
+
+<!-- ════════════════════════ HEADER ════════════════════════ -->
+<header class="site-header">
+  <div class="header-left">
+    <button class="hamburger-btn" aria-label="Toggle sidebar">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="index.html" class="logo-link">
+      <span class="logo-icon">🌹</span>
+      <span class="logo-text">PoetryTube</span>
+    </a>
+  </div>
+  <div class="header-center">
+    <form class="search-form" role="search" onsubmit="return false;">
+      <input type="search" class="search-input" placeholder="Search spoken word, poets, themes…" aria-label="Search" />
+      <button class="search-btn" aria-label="Submit search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+    </form>
+  </div>
+  <div class="header-right">
+    <div class="header-lang-selector" id="header-lang-selector">
+      <button class="header-lang-btn" id="header-lang-btn" aria-label="Select language">
+        <span class="lang-flag">🌍</span>
+        <span class="lang-name" id="header-lang-name">English</span>
+        <svg class="lang-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <ul class="header-lang-dropdown" id="header-lang-dropdown" role="listbox">
+        <li><button class="header-lang-option active" data-lang="en" role="option"><span class="opt-flag">🌐</span> English</button></li>
+        <li><button class="header-lang-option" data-lang="sw" role="option"><span class="opt-flag">🇰🇪</span> Swahili</button></li>
+        <li><button class="header-lang-option" data-lang="zu" role="option"><span class="opt-flag">🇿🇦</span> isiZulu</button></li>
+        <li><button class="header-lang-option" data-lang="yo" role="option"><span class="opt-flag">🇳🇬</span> Yorùbá</button></li>
+        <li><button class="header-lang-option" data-lang="am" role="option"><span class="opt-flag">🇪🇹</span> አማርኛ</button></li>
+        <li><button class="header-lang-option" data-lang="fr" role="option"><span class="opt-flag">🇫🇷</span> Français</button></li>
+      </ul>
+    </div>
+    <div class="avatar-btn" role="button" tabindex="0">?</div>
+  </div>
+</header>
+
+<!-- ════════════════════════ SIDEBAR ════════════════════════ -->
+<div class="sidebar-overlay"></div>
+
+<nav class="sidebar" aria-label="Main navigation">
+  <div class="sidebar-section">
+    <a href="index.html" class="sidebar-item">
+      <span class="sidebar-icon"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+      <span class="sidebar-label">Home</span>
+    </a>
+    <a href="upload.html" class="sidebar-item active">
+      <span class="sidebar-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+      <span class="sidebar-label">Upload Your Work</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ════════════════════════ MAIN ════════════════════════ -->
+<div class="main-content">
+  <main class="content-area">
+    <div class="upload-page">
+
+      <h1 class="upload-page-title">Share Your Voice 🌹</h1>
+      <p class="upload-page-subtitle">Upload your performance. Let your words live forever.</p>
+
+      <!-- Drop zone -->
+      <div class="upload-dropzone" role="button" tabindex="0" aria-label="Upload video file">
+        <div class="dz-icon">🎬</div>
+        <h3>Drag &amp; drop your video here</h3>
+        <p>MP4, MOV, WebM · Up to 4GB</p>
+        <p style="margin-top:8px; font-size:0.75rem; color: var(--gold-dim);">or click to browse files</p>
+      </div>
+
+      <!-- Basic info card -->
+      <div class="form-card">
+        <div class="form-card-title">✦ Performance Details</div>
+
+        <div class="form-group">
+          <label class="form-label" for="video-title-input">Title</label>
+          <input type="text" id="video-title-input" class="form-input" placeholder="Give your piece a name…" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="poem-description">Poem / Description</label>
+          <textarea id="poem-description" class="form-textarea" placeholder="Paste your poem or describe your performance… (Used for AI title &amp; mood suggestions)"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="performer-name">Performer Name</label>
+          <input type="text" id="performer-name" class="form-input" placeholder="Your name or stage name" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="category-select">Category</label>
+          <select id="category-select" class="form-input" style="cursor:pointer;">
+            <option value="">Select a category…</option>
+            <option>Spoken Word</option>
+            <option>Slam Poetry</option>
+            <option>Storytelling</option>
+            <option>Theatre &amp; Monologue</option>
+            <option>Music Poetry</option>
+            <option>Visual Art Performances</option>
+            <option>New Voices</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ── AI FEATURE 2: Title Generator ────── -->
+      <div class="ai-feature-card">
+        <div class="ai-feature-header">
+          <span class="ai-badge">✨ AI</span>
+          <span class="ai-feature-title">Generate Title Ideas</span>
+        </div>
+        <p style="font-size:0.82rem; color: var(--text-muted); margin-bottom:16px; font-family: var(--font-serif); font-style:italic;">
+          Paste your poem in the description above, then let AI suggest 5 powerful titles across different styles.
+        </p>
+        <button class="ai-action-btn" id="generate-titles-btn">
+          ✨ Get AI Title Ideas
+        </button>
+
+        <!-- Title chips (populated by JS) -->
+        <div class="title-chips" id="title-chips"></div>
+      </div>
+
+      <!-- ── AI FEATURE 3: Mood Auto-Tagger ────── -->
+      <div class="ai-feature-card">
+        <div class="ai-feature-header">
+          <span class="ai-badge">🏷️ AI</span>
+          <span class="ai-feature-title">Auto-Tag Your Mood</span>
+        </div>
+        <p style="font-size:0.82rem; color: var(--text-muted); margin-bottom:16px; font-family: var(--font-serif); font-style:italic;">
+          Let AI read your poem and auto-select the matching emotional mood tags, or choose them yourself.
+        </p>
+
+        <button class="ai-action-btn" id="auto-tag-btn" style="margin-bottom:16px;">
+          🏷️ Auto-Tag Mood
+        </button>
+
+        <div class="mood-tag-selector" role="group" aria-label="Mood tags">
+          <button class="mood-tag-chip mood-defiant" data-mood="defiant">Defiant 🔥</button>
+          <button class="mood-tag-chip mood-tender"  data-mood="tender">Tender 🌸</button>
+          <button class="mood-tag-chip mood-grief"   data-mood="grief">Grief 💙</button>
+          <button class="mood-tag-chip mood-joy"     data-mood="joy">Joy ✨</button>
+          <button class="mood-tag-chip mood-resistance" data-mood="resistance">Resistance ✊</button>
+          <button class="mood-tag-chip mood-love"    data-mood="love">Love 🌹</button>
+          <button class="mood-tag-chip mood-identity" data-mood="identity">Identity 🌍</button>
+          <button class="mood-tag-chip mood-hope"    data-mood="hope">Hope 🌱</button>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div style="text-align:center; padding: 12px 0 40px;">
+        <button class="submit-btn" onclick="alert('Upload complete! (Demo — connect backend to publish)')">
+          Publish My Performance 🌹
+        </button>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ════════════════════════ FOOTER ════════════════════════ -->
+<footer class="site-footer">
+  <p>PoetryTube — <em>Where African Voices Live Forever</em></p>
+  <p>Built by <a href="https://creativelynanda.co.za" target="_blank" rel="noopener">Nandawula Kabali-Kagwa</a> · Creative Technologist · AI Engineer</p>
+</footer>
+
+<!-- ════════════════════════ AUTH MODAL ════════════════════════ -->
+<div class="auth-modal" id="auth-modal" role="dialog" aria-modal="true" aria-label="Sign in to PoetryTube">
+  <div class="auth-backdrop"></div>
+  <div class="auth-card">
+    <button class="auth-close" aria-label="Close">&times;</button>
+    <div class="auth-header">
+      <span class="auth-logo-icon">🌹</span>
+      <h2 class="auth-title">Welcome to PoetryTube</h2>
+      <p class="auth-subtitle">Where African Voices Live Forever</p>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="signin">Sign In</button>
+      <button class="auth-tab" data-tab="signup">Create Account</button>
+    </div>
+    <div class="auth-form-panel active" id="signin-form">
+      <input class="auth-input" type="email" placeholder="Email address" required autocomplete="email" />
+      <input class="auth-input" type="password" placeholder="Password" required autocomplete="current-password" />
+      <button class="auth-submit-btn" type="button" onclick="document.getElementById('signin-form').dispatchEvent(new Event('submit'))">Sign In</button>
+      <p class="auth-error" id="signin-error"></p>
+    </div>
+    <div class="auth-form-panel" id="signup-form">
+      <input class="auth-input" type="text" name="displayName" placeholder="Your name or stage name" required autocomplete="name" />
+      <input class="auth-input" type="email" placeholder="Email address" required autocomplete="email" />
+      <input class="auth-input" type="password" placeholder="Password (min 6 characters)" required minlength="6" autocomplete="new-password" />
+      <button class="auth-submit-btn" type="button" onclick="document.getElementById('signup-form').dispatchEvent(new Event('submit'))">Create Account</button>
+      <p class="auth-error" id="signup-error"></p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/supabase-client.js"></script>
+</body>
+</html>
