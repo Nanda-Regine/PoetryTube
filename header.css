@@ -1,0 +1,235 @@
+/* ============================================
+   POETRYTUBE — header.css
+   ============================================ */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: rgba(15, 10, 10, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 0 20px;
+  z-index: 100;
+  gap: 16px;
+}
+
+/* ── Left section: hamburger + logo ─────────── */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.hamburger-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
+  transition: background var(--transition);
+}
+.hamburger-btn:hover {
+  background: var(--bg-hover);
+}
+.hamburger-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(212,175,55,0.4));
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, var(--text) 0%, var(--gold) 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+/* ── Center: search bar ─────────────────────── */
+.header-center {
+  flex: 1;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-form {
+  display: flex;
+  flex: 1;
+  height: 38px;
+}
+
+.search-input {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-right: none;
+  color: var(--text);
+  padding: 0 16px;
+  font-size: 0.875rem;
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+  outline: none;
+  transition: border-color var(--transition);
+  min-height: 38px;
+}
+.search-input::placeholder { color: var(--text-dim); }
+.search-input:focus {
+  border-color: var(--burgundy-light);
+  background: var(--bg-hover);
+}
+
+.search-btn {
+  width: 52px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-left: none;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: background var(--transition), color var(--transition);
+  min-height: 38px;
+}
+.search-btn:hover {
+  background: var(--burgundy);
+  color: var(--text);
+}
+.search-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+}
+
+/* ── Right section: actions ─────────────────── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.header-action-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: background var(--transition), color var(--transition);
+  position: relative;
+}
+.header-action-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.header-action-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  width: auto;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background: var(--burgundy);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.upload-btn:hover {
+  background: var(--burgundy-light);
+  box-shadow: 0 0 16px rgba(74,14,42,0.5);
+}
+.upload-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.avatar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--burgundy-mid);
+  border: 2px solid var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--gold);
+  transition: border-color var(--transition);
+  cursor: pointer;
+}
+.avatar-btn:hover { border-color: var(--gold); }
+
+/* ── Mobile header adjustments ──────────────── */
+@media (max-width: 768px) {
+  .header-center {
+    max-width: 100%;
+  }
+  .upload-btn .btn-label {
+    display: none;
+  }
+  .upload-btn {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 0 12px;
+    gap: 8px;
+  }
+  .logo-text { font-size: 1.1rem; }
+  .header-action-btn:not(.upload-btn) {
+    display: none;
+  }
+}
